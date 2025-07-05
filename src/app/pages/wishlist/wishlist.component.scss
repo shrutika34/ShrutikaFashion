@@ -1,0 +1,24 @@
+.wishlist-page {
+  padding: 2rem;
+
+  .wishlist-item {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+
+    img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+    }
+
+    button {
+      background-color: crimson;
+      color: white;
+      border: none;
+      padding: 0.4rem 0.8rem;
+      margin-top: 0.5rem;
+      cursor: pointer;
+    }
+  }
+}

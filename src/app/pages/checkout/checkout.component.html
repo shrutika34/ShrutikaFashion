@@ -1,0 +1,20 @@
+<section class="checkout">
+  <h2>Checkout</h2>
+
+  <form (ngSubmit)="placeOrder()">
+    <label>Name:</label>
+    <input type="text" [(ngModel)]="name" name="name" required />
+
+    <label>Address:</label>
+    <textarea [(ngModel)]="address" name="address" required></textarea>
+
+    <label>Payment Method:</label>
+    <select [(ngModel)]="paymentMethod" name="paymentMethod">
+      <option value="card">Credit/Debit Card</option>
+      <option value="cod">Cash on Delivery</option>
+    </select>
+
+    <button type="submit" class="btn">Place Order</button>
+  </form>
+</section>
+

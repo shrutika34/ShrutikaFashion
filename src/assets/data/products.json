@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "name": "Luxury Dress",
+    "price": 2499,
+    "description": "Elegant luxury wear made from premium materials.",
+    "image": "assets/images/product1.jpg"
+  },
+  {
+    "id": 2,
+    "name": "Classic Gown",
+    "price": 3499,
+    "description": "Timeless design perfect for evening occasions.",
+    "image": "assets/images/product2.jpg"
+  },
+  {
+    "id": 3,
+    "name": "Velvet Skirt",
+    "price": 1599,
+    "description": "Premium velvet with stylish silhouette.",
+    "image": "assets/images/product3.jpg"
+  }
+]

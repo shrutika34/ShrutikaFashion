@@ -1,0 +1,40 @@
+.cart-page {
+  padding: 2rem;
+
+  .cart-item {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 1rem;
+
+    img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+    }
+
+    h3 {
+      margin: 0;
+    }
+
+    button {
+      margin-top: 0.5rem;
+      background-color: #222;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+    }
+  }
+
+  .total {
+    margin-top: 2rem;
+    font-size: 1.2rem;
+
+    button {
+      background-color: crimson;
+      margin-left: 1rem;
+    }
+  }
+}

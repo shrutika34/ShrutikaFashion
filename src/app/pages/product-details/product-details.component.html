@@ -1,0 +1,9 @@
+<section class="product-details" *ngIf="product">
+  <img [src]="product.image" [alt]="product.name" />
+  <div class="details">
+    <h2>{{ product.name }}</h2>
+    <p class="price">₹{{ product.price }}</p>
+    <p class="description">{{ product.description }}</p>
+    <button class="btn">Add to Cart</button>
+  </div>
+</section>
