@@ -1,8 +1,50 @@
-<div class="form-container">
-  <h2>Register</h2>
-  <form (ngSubmit)="register()">
-    <input type="email" placeholder="Email" [(ngModel)]="email" name="email" required />
-    <input type="password" placeholder="Password" [(ngModel)]="password" name="password" required />
-    <button type="submit">Register</button>
-  </form>
+<div class="auth-wrapper">
+  <div class="auth-card">
+    <h2>Create Account</h2>
+
+    <form (ngSubmit)="register()">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          [(ngModel)]="name"
+          placeholder="Your name"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          [(ngModel)]="email"
+          placeholder="Your email"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          [(ngModel)]="password"
+          placeholder="Choose a password"
+          required
+        />
+      </div>
+
+      <div class="actions">
+        <button type="submit" class="btn-auth">Register</button>
+        <a class="link" routerLink="/login">Already have an account? Login</a>
+      </div>
+
+      <div class="message" *ngIf="message">{{ message }}</div>
+    </form>
+  </div>
 </div>

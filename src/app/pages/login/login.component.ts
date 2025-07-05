@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -14,14 +14,15 @@ import { AuthService } from '../../services/auth.service';
 export class LoginComponent {
   email = '';
   password = '';
+  error = '';
 
   constructor(private auth: AuthService, private router: Router) {}
 
-  login() {
+  login(): void {
     if (this.auth.login(this.email, this.password)) {
       this.router.navigate(['/']);
     } else {
-      alert('Invalid email or password.');
+      this.error = 'Invalid email or password.';
     }
   }
 }

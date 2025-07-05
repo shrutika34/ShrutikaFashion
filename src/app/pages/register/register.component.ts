@@ -1,25 +1,33 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { AuthService } from '../../services/auth.service';
+import { RouterModule, Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent {
+  name = '';
   email = '';
   password = '';
+  message = '';
 
-  constructor(private auth: AuthService, private router: Router) {}
+  constructor(private router: Router) {}
 
   register() {
-    if (this.auth.register(this.email, this.password)) {
-      this.router.navigate(['/login']);
+    if (this.name.trim() && this.email.trim() && this.password.trim()) {
+      localStorage.setItem('user', JSON.stringify({ name: this.name, email: this.email, password: this.password }));
+      this.message = 'Account created! Redirecting to login...';
+
+      setTimeout(() => {
+        this.router.navigate(['/login']);
+      }, 2000);
+    } else {
+      this.message = 'Please fill all fields.';
     }
   }
 }

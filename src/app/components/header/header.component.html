@@ -1,16 +1,19 @@
-<header class="main-header">
+<header class="luxury-header">
   <div class="container">
     <div class="logo">
-      <a routerLink="/">ShrutikaFashion</a>
+      <a routerLink="/">Shrutika<span>Fashion</span></a>
     </div>
-
     <nav class="nav-links">
-      <a routerLink="/">Home</a>
-      <a routerLink="/products">Products</a>
-      <a routerLink="/wishlist">Wishlist</a>
-      <a routerLink="/cart">Cart</a>
-      <a routerLink="/login">Login</a>
-      <a routerLink="/register">Register</a>
+      <a routerLink="/" class="nav-item">Home</a>
+      <a routerLink="/products" class="nav-item">Collections</a>
+      <a routerLink="/wishlist" class="nav-item">
+        <i class="icon-heart"></i> Wishlist ({{ wishlistCount }})
+      </a>
+      <a routerLink="/cart" class="nav-item">
+        <i class="icon-bag"></i> Cart ({{ cartCount }})
+      </a>
+      <a routerLink="/login" class="nav-item">Login</a>
+      <a routerLink="/register" class="nav-item btn-signup">Sign Up</a>
     </nav>
   </div>
 </header>

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { WishlistService } from '../../services/wishlist.service';
+import { CartService } from '../../services/cart.service';
 
 @Component({
   selector: 'app-header',
@@ -12,15 +13,19 @@ import { WishlistService } from '../../services/wishlist.service';
 })
 export class HeaderComponent implements OnInit {
   wishlistCount: number = 0;
+  cartCount: number = 0;
 
-  constructor(private wishlistService: WishlistService) {}
+  constructor(
+    private wishlistService: WishlistService,
+    private cartService: CartService
+  ) {}
 
   ngOnInit(): void {
-    this.updateWishlistCount();
+    this.updateCounts();
   }
 
-  updateWishlistCount() {
+  updateCounts(): void {
     this.wishlistCount = this.wishlistService.getItems().length;
+    this.cartCount     = this.cartService.getCartItems().length;
   }
 }
-
