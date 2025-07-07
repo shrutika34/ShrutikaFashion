@@ -1,13 +1,12 @@
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
-import { AuthService } from '../../services/auth.service';
+import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router'; 
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterModule], 
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
@@ -16,13 +15,15 @@ export class LoginComponent {
   password = '';
   error = '';
 
-  constructor(private auth: AuthService, private router: Router) {}
+  login() {
+    const stored = localStorage.getItem('user');
+    const user = stored ? JSON.parse(stored) : null;
 
-  login(): void {
-    if (this.auth.login(this.email, this.password)) {
-      this.router.navigate(['/']);
+    if (user && user.email === this.email && user.password === this.password) {
+      localStorage.setItem('isLoggedIn', 'true');
+      window.location.href = '/';
     } else {
-      this.error = 'Invalid email or password.';
+      this.error = user ? 'Invalid credentials.' : 'No user found.';
     }
   }
 }

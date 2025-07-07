@@ -20,7 +20,16 @@ export class RegisterComponent {
 
   register() {
     if (this.name.trim() && this.email.trim() && this.password.trim()) {
-      localStorage.setItem('user', JSON.stringify({ name: this.name, email: this.email, password: this.password }));
+      const newUser = {
+        name: this.name,
+        email: this.email,
+        password: this.password
+      };
+
+      if (typeof localStorage !== 'undefined') {
+        localStorage.setItem('user', JSON.stringify(newUser));
+      }
+
       this.message = 'Account created! Redirecting to login...';
 
       setTimeout(() => {
