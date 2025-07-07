@@ -1,26 +1,27 @@
-<!-- Hero Welcome Section -->
-<section class="home">
-  <div class="intro">
+<section class="home-hero">
+  <div class="hero-content">
     <h1>Welcome to <span>ShrutikaFashion</span></h1>
-    <p>Discover luxury fashion styles curated just for you.</p>
-    <button>Explore Collection</button>
+    <p>Discover timeless luxury crafted just for you</p>
+    <button routerLink="/products">Shop Now</button>
   </div>
 </section>
 
-<!-- Star Products Section -->
+
+<!-- Star Products -->
 <section class="star-products">
   <h2>🔥 Star Picks of the Week</h2>
-  <div class="products-grid">
+  <div class="product-grid">
     <div class="product-card" *ngFor="let product of starProducts">
       <img [src]="product.image" alt="{{ product.name }}">
       <h3>{{ product.name }}</h3>
       <p class="price">₹{{ product.price }}</p>
+      <button class="add-to-cart" (click)="addToCart(product)">Add to Cart</button>
     </div>
   </div>
 </section>
 
 <!-- Categories Section -->
-<section class="category-section">
+<section class="home-categories">
   <h2>👜 Explore Categories</h2>
   <div class="category-grid">
     <div class="category-card" *ngFor="let cat of categories">

@@ -1,1 +1,8 @@
-/* You can add global styles to this file, and also import other style files */
+@import 'ngx-toastr/toastr';
+;
+
+.toast-bottom-center {
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+}

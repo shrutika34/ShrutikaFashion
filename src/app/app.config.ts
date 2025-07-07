@@ -1,5 +1,7 @@
 import { ApplicationConfig } from '@angular/core';
 import { provideRouter } from '@angular/router';
+import { provideAnimations } from '@angular/platform-browser/animations';
+import { provideToastr } from 'ngx-toastr';
 
 import { HomeComponent } from './pages/home/home.component';
 import { ProductListComponent } from './pages/product-list/product-list.component';
@@ -14,7 +16,7 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter([
       { path: '', component: HomeComponent },
-      { path: 'products', component: ProductListComponent },
+      { path: 'products', component: ProductListComponent },     // ✅ Collection Page
       { path: 'product/:id', component: ProductDetailsComponent },
       { path: 'cart', component: CartComponent },
       { path: 'wishlist', component: WishlistComponent },
@@ -22,6 +24,8 @@ export const appConfig: ApplicationConfig = {
       { path: 'register', component: RegisterComponent },
       { path: 'checkout', component: CheckoutComponent },
       { path: '**', redirectTo: '' }
-    ])
+    ]),
+    provideAnimations(),
+    provideToastr()
   ]
 };
