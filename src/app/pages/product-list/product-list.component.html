@@ -24,7 +24,11 @@
       <img [src]="product.image" alt="{{ product.name }}" />
       <h3>{{ product.name }}</h3>
       <p class="price">₹{{ product.price }}</p>
-      <button class="add-to-cart" (click)="addToCart(product)">Add to Cart</button>
+
+      <div class="button-group">
+        <button class="wishlist-btn" (click)="addToWishlist(product)">♡ Wishlist</button>
+        <button class="add-to-cart" (click)="addToCart(product)">Add to Cart</button>
+      </div>
     </div>
   </div>
 </section>

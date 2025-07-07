@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { WishlistService } from '../../services/wishlist.service';
 
@@ -7,23 +7,17 @@ import { WishlistService } from '../../services/wishlist.service';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './wishlist.component.html',
-  styleUrls: ['./wishlist.component.scss']
+  styleUrl: './wishlist.component.scss'
 })
-export class WishlistComponent implements OnInit {
+export class WishlistComponent {
   wishlistItems: any[] = [];
 
-  constructor(private wishlistService: WishlistService) {}
-
-  ngOnInit() {
-    this.loadWishlist();
-  }
-
-  loadWishlist() {
+  constructor(private wishlistService: WishlistService) {
     this.wishlistItems = this.wishlistService.getItems();
   }
 
   removeFromWishlist(id: number) {
     this.wishlistService.removeFromWishlist(id);
-    this.loadWishlist();
+    this.wishlistItems = this.wishlistService.getItems(); // Refresh view
   }
 }

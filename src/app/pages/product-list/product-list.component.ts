@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { CartService } from '../../services/cart.service';
+import { WishlistService } from '../../services/wishlist.service';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -14,6 +15,7 @@ import { ToastrService } from 'ngx-toastr';
 export class ProductListComponent {
   constructor(
     private cartService: CartService,
+    private wishlistService: WishlistService,
     private toastr: ToastrService
   ) {}
 
@@ -75,6 +77,14 @@ export class ProductListComponent {
   addToCart(product: any) {
     this.cartService.addToCart(product);
     this.toastr.success(`${product.name} added to cart`, 'Success', {
+      timeOut: 2000,
+      positionClass: 'toast-bottom-center'
+    });
+  }
+
+  addToWishlist(product: any) {
+    this.wishlistService.addToWishlist(product);
+    this.toastr.info(`${product.name} added to wishlist`, 'Wishlist', {
       timeOut: 2000,
       positionClass: 'toast-bottom-center'
     });

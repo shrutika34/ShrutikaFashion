@@ -41,7 +41,8 @@
           color: #f0f0f0;
           transition: 0.3s;
 
-          &:hover {
+          &:hover,
+          &.active {
             color: #f9b234;
           }
         }

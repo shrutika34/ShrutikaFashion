@@ -7,9 +7,9 @@ export class WishlistService {
   private wishlist: any[] = [];
 
   constructor() {
-    if (typeof window !== 'undefined' && window.localStorage) {
-      const saved = localStorage.getItem('wishlist');
-      this.wishlist = saved ? JSON.parse(saved) : [];
+    if (this.isBrowser()) {
+      const stored = localStorage.getItem('wishlist');
+      this.wishlist = stored ? JSON.parse(stored) : [];
     }
   }
 
@@ -17,31 +17,26 @@ export class WishlistService {
     return this.wishlist;
   }
 
-  isInWishlist(id: number): boolean {
-    return this.wishlist.some(item => item.id === id);
-  }
-
   addToWishlist(product: any) {
-    if (!this.isInWishlist(product.id)) {
+    const exists = this.wishlist.find(p => p.id === product.id);
+    if (!exists) {
       this.wishlist.push(product);
-      this.save();
+      this.saveWishlist();
     }
   }
 
   removeFromWishlist(id: number) {
-    this.wishlist = this.wishlist.filter(item => item.id !== id);
-    this.save();
+    this.wishlist = this.wishlist.filter(p => p.id !== id);
+    this.saveWishlist();
   }
 
-  toggleWishlist(product: any) {
-    this.isInWishlist(product.id)
-      ? this.removeFromWishlist(product.id)
-      : this.addToWishlist(product);
-  }
-
-  private save() {
-    if (typeof window !== 'undefined' && window.localStorage) {
+  private saveWishlist() {
+    if (this.isBrowser()) {
       localStorage.setItem('wishlist', JSON.stringify(this.wishlist));
     }
+  }
+
+  private isBrowser(): boolean {
+    return typeof window !== 'undefined' && typeof localStorage !== 'undefined';
   }
 }
