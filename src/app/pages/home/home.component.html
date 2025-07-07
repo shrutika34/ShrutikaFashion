@@ -1,4 +1,31 @@
+<!-- Hero Welcome Section -->
 <section class="home">
-  <h1>Welcome to ShrutikaFashion</h1>
-  <p>Discover luxury fashion styles curated just for you.</p>
+  <div class="intro">
+    <h1>Welcome to <span>ShrutikaFashion</span></h1>
+    <p>Discover luxury fashion styles curated just for you.</p>
+    <button>Explore Collection</button>
+  </div>
+</section>
+
+<!-- Star Products Section -->
+<section class="star-products">
+  <h2>🔥 Star Picks of the Week</h2>
+  <div class="products-grid">
+    <div class="product-card" *ngFor="let product of starProducts">
+      <img [src]="product.image" alt="{{ product.name }}">
+      <h3>{{ product.name }}</h3>
+      <p class="price">₹{{ product.price }}</p>
+    </div>
+  </div>
+</section>
+
+<!-- Categories Section -->
+<section class="category-section">
+  <h2>👜 Explore Categories</h2>
+  <div class="category-grid">
+    <div class="category-card" *ngFor="let cat of categories">
+      <img [src]="cat.image" alt="{{ cat.title }}">
+      <span>{{ cat.title }}</span>
+    </div>
+  </div>
 </section>
