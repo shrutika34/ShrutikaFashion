@@ -1,13 +1,18 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { PLATFORM_ID } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
   private cartItems: any[] = [];
+  private isBrowser: boolean = false;
 
   constructor() {
-    if (typeof window !== 'undefined' && window.localStorage) {
+    this.isBrowser = typeof window !== 'undefined' && !!window.localStorage;
+
+    if (this.isBrowser) {
       const stored = localStorage.getItem('cart');
       this.cartItems = stored ? JSON.parse(stored) : [];
     }
@@ -17,32 +22,32 @@ export class CartService {
     return this.cartItems;
   }
 
-  addToCart(product: any) {
+  addToCart(product: any): void {
     const existing = this.cartItems.find(item => item.id === product.id);
     if (existing) {
       existing.quantity += 1;
     } else {
       this.cartItems.push({ ...product, quantity: 1 });
     }
-    this.saveCartItems();
+    this.updateLocalStorage();
   }
 
-  removeFromCart(id: number) {
+  removeFromCart(id: number): void {
     this.cartItems = this.cartItems.filter(item => item.id !== id);
-    this.saveCartItems();
+    this.updateLocalStorage();
   }
 
-  clearCart() {
+  clearCart(): void {
     this.cartItems = [];
-    this.saveCartItems();
+    this.updateLocalStorage();
   }
 
   getTotal(): number {
     return this.cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
   }
 
-  private saveCartItems() {
-    if (typeof window !== 'undefined' && window.localStorage) {
+  private updateLocalStorage(): void {
+    if (this.isBrowser) {
       localStorage.setItem('cart', JSON.stringify(this.cartItems));
     }
   }

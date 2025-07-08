@@ -3,7 +3,6 @@ import { provideRouter } from '@angular/router';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideToastr } from 'ngx-toastr';
 
-// Pages
 import { HomeComponent } from './pages/home/home.component';
 import { ProductListComponent } from './pages/product-list/product-list.component';
 import { ProductDetailsComponent } from './pages/product-details/product-details.component';
@@ -11,7 +10,7 @@ import { CartComponent } from './pages/cart/cart.component';
 import { WishlistComponent } from './pages/wishlist/wishlist.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
-import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component'; 
+import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
 import { CheckoutComponent } from './pages/checkout/checkout.component';
 
 export const appConfig: ApplicationConfig = {
@@ -24,7 +23,7 @@ export const appConfig: ApplicationConfig = {
       { path: 'wishlist', component: WishlistComponent },
       { path: 'login', component: LoginComponent },
       { path: 'register', component: RegisterComponent },
-      { path: 'forgot-password', component: ForgotPasswordComponent }, 
+      { path: 'forgot-password', component: ForgotPasswordComponent },
       { path: 'checkout', component: CheckoutComponent },
       { path: '**', redirectTo: '' }
     ]),

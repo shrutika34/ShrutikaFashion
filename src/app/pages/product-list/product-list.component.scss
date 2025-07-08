@@ -2,11 +2,14 @@
 
 .collection-wrapper {
   padding: 3rem 2rem;
+  background-color: #fffafc;
 
   h2 {
     text-align: center;
     font-family: $heading-font;
-    margin-bottom: 2rem;
+    font-size: 2rem;
+    color: #d63384;
+    margin-bottom: 2.5rem;
   }
 
   .controls {
@@ -14,7 +17,7 @@
     flex-wrap: wrap;
     justify-content: center;
     gap: 1rem;
-    margin-bottom: 2rem;
+    margin-bottom: 2.5rem;
 
     input, select {
       padding: 10px 16px;
@@ -22,12 +25,19 @@
       border: 1px solid #ccc;
       font-family: $body-font;
       font-size: 0.95rem;
+      min-width: 200px;
+      outline: none;
+    }
+
+    input:focus, select:focus {
+      border-color: $accent-color;
+      box-shadow: 0 0 5px rgba($accent-color, 0.4);
     }
   }
 
   .product-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     gap: 2rem;
   }
 
@@ -40,8 +50,8 @@
     transition: 0.3s;
 
     &:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+      transform: translateY(-6px);
+      box-shadow: 0 10px 24px rgba(0,0,0,0.12);
     }
 
     img {
@@ -55,18 +65,20 @@
       font-size: 1.1rem;
       margin: 0.8rem 0 0.3rem;
       font-family: $body-font;
+      color: #333;
     }
 
     .price {
       font-weight: bold;
       color: $accent-color;
+      font-size: 1rem;
     }
 
     .button-group {
       display: flex;
       justify-content: center;
       gap: 10px;
-      margin-top: 0.5rem;
+      margin-top: 0.8rem;
 
       .wishlist-btn {
         background-color: transparent;
@@ -76,21 +88,27 @@
         padding: 6px 14px;
         cursor: pointer;
         font-size: 0.85rem;
+        transition: all 0.3s ease;
 
         &:hover {
           background-color: $accent-color;
-          color: #000;
+          color: #fff;
         }
       }
 
       .add-to-cart {
         background-color: $accent-color;
-        color: #000;
+        color: #fff;
         padding: 6px 16px;
         border: none;
         border-radius: 30px;
         font-size: 0.85rem;
         cursor: pointer;
+        transition: background-color 0.3s ease;
+
+        &:hover {
+          background-color: darken($accent-color, 5%);
+        }
       }
     }
   }

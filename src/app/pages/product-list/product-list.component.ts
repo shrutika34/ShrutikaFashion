@@ -1,45 +1,38 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { CartService } from '../../services/cart.service';
 import { WishlistService } from '../../services/wishlist.service';
 import { ToastrService } from 'ngx-toastr';
+import { ProductService, Product } from '../../services/product.service';
 
 @Component({
   selector: 'app-product-list',
   standalone: true,
   imports: [CommonModule, RouterModule],
   templateUrl: './product-list.component.html',
-  styleUrl: './product-list.component.scss'
+  styleUrls: ['./product-list.component.scss']
 })
 export class ProductListComponent {
-  constructor(
-    private cartService: CartService,
-    private wishlistService: WishlistService,
-    private toastr: ToastrService
-  ) {}
+  private cartService = inject(CartService);
+  private wishlistService = inject(WishlistService);
+  private toastr = inject(ToastrService);
+  private productService = inject(ProductService);
 
-  products = [
-    { id: 1, name: 'Velvet Gown', price: 9999, category: 'Dresses', image: 'assets/images/products/evening-gown.jpg' },
-    { id: 2, name: 'Studded Handbag', price: 7499, category: 'Bags', image: 'assets/images/products/gold-bag.jpg' },
-    { id: 3, name: 'Crystal Heels', price: 8999, category: 'Shoes', image: 'assets/images/products/crystal-heels.jpg' },
-    { id: 4, name: 'Pink Designer Dress', price: 10999, category: 'Dresses', image: 'assets/images/products/pink-dress.jpg' },
-    { id: 5, name: 'Luxury Sling Bag', price: 5999, category: 'Bags', image: 'assets/images/products/sling-bag.jpg' },
-    { id: 6, name: 'Classic Black Heels', price: 7999, category: 'Shoes', image: 'assets/images/products/black-heels.jpg' },
-    { id: 7, name: 'Emerald Green Gown', price: 11999, category: 'Dresses', image: 'assets/images/products/emerald-gown.jpg' },
-    { id: 8, name: 'Royal Blue Clutch', price: 4599, category: 'Bags', image: 'assets/images/products/royal-clutch.jpg' },
-    { id: 9, name: 'Pearl Embellished Flats', price: 4999, category: 'Shoes', image: 'assets/images/products/pearl-flats.jpg' },
-    { id: 10, name: 'Golden Hair Clip Set', price: 1299, category: 'Accessories', image: 'assets/images/products/golden-hairclip.jpg' },
-    { id: 11, name: 'Statement Necklace', price: 1899, category: 'Accessories', image: 'assets/images/products/statement-necklace.jpg' },
-    { id: 12, name: 'Luxury Watch', price: 5599, category: 'Accessories', image: 'assets/images/products/luxury-watch.jpg' }
-  ];
+  products: Product[] = [];
 
-  categories = ['All', 'Dresses', 'Shoes', 'Bags', 'Accessories'];
-  selectedCategory = 'All';
-  searchTerm = '';
-  sortOption = '';
+  categories: string[] = ['All', 'Dresses', 'Shoes', 'Bags', 'Accessories'];
+  selectedCategory: string = 'All';
+  searchTerm: string = '';
+  sortOption: string = '';
 
-  get filteredProducts() {
+  ngOnInit(): void {
+    this.productService.getProducts().subscribe((res) => {
+      this.products = res;
+    });
+  }
+
+  get filteredProducts(): Product[] {
     let result = [...this.products];
 
     if (this.selectedCategory !== 'All') {
@@ -47,7 +40,9 @@ export class ProductListComponent {
     }
 
     if (this.searchTerm) {
-      result = result.filter(p => p.name.toLowerCase().includes(this.searchTerm.toLowerCase()));
+      result = result.filter(p =>
+        p.name.toLowerCase().includes(this.searchTerm.toLowerCase())
+      );
     }
 
     if (this.sortOption === 'asc') {
@@ -59,22 +54,22 @@ export class ProductListComponent {
     return result;
   }
 
-  handleSearch(event: Event) {
+  handleSearch(event: Event): void {
     const input = event.target as HTMLInputElement;
     this.searchTerm = input.value;
   }
 
-  handleCategoryChange(event: Event) {
+  handleCategoryChange(event: Event): void {
     const select = event.target as HTMLSelectElement;
     this.selectedCategory = select.value;
   }
 
-  handleSortChange(event: Event) {
+  handleSortChange(event: Event): void {
     const select = event.target as HTMLSelectElement;
     this.sortOption = select.value;
   }
 
-  addToCart(product: any) {
+  addToCart(product: Product): void {
     this.cartService.addToCart(product);
     this.toastr.success(`${product.name} added to cart`, 'Success', {
       timeOut: 2000,
@@ -82,7 +77,7 @@ export class ProductListComponent {
     });
   }
 
-  addToWishlist(product: any) {
+  addToWishlist(product: Product): void {
     this.wishlistService.addToWishlist(product);
     this.toastr.info(`${product.name} added to wishlist`, 'Wishlist', {
       timeOut: 2000,

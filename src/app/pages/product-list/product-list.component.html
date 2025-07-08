@@ -1,5 +1,5 @@
 <section class="collection-wrapper">
-  <h2>🛍️ Shop Your Style</h2>
+  <h2 class="title">🛍️ Shop Your Style</h2>
 
   <div class="controls">
     <input
@@ -9,7 +9,7 @@
     />
 
     <select (change)="handleCategoryChange($event)">
-      <option *ngFor="let cat of categories">{{ cat }}</option>
+      <option *ngFor="let cat of categories" [value]="cat">{{ cat }}</option>
     </select>
 
     <select (change)="handleSortChange($event)">

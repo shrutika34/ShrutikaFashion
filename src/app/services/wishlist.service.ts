@@ -5,9 +5,10 @@ import { Injectable } from '@angular/core';
 })
 export class WishlistService {
   private wishlist: any[] = [];
+  private isBrowser = typeof window !== 'undefined' && typeof localStorage !== 'undefined';
 
   constructor() {
-    if (this.isBrowser()) {
+    if (this.isBrowser) {
       const stored = localStorage.getItem('wishlist');
       this.wishlist = stored ? JSON.parse(stored) : [];
     }
@@ -17,7 +18,7 @@ export class WishlistService {
     return this.wishlist;
   }
 
-  addToWishlist(product: any) {
+  addToWishlist(product: any): void {
     const exists = this.wishlist.find(p => p.id === product.id);
     if (!exists) {
       this.wishlist.push(product);
@@ -25,18 +26,14 @@ export class WishlistService {
     }
   }
 
-  removeFromWishlist(id: number) {
+  removeFromWishlist(id: number): void {
     this.wishlist = this.wishlist.filter(p => p.id !== id);
     this.saveWishlist();
   }
 
-  private saveWishlist() {
-    if (this.isBrowser()) {
+  private saveWishlist(): void {
+    if (this.isBrowser) {
       localStorage.setItem('wishlist', JSON.stringify(this.wishlist));
     }
-  }
-
-  private isBrowser(): boolean {
-    return typeof window !== 'undefined' && typeof localStorage !== 'undefined';
   }
 }

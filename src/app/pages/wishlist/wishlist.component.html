@@ -1,18 +1,16 @@
-<div class="wishlist-page">
-  <h2>Your Wishlist</h2>
+<section class="wishlist-wrapper">
+  <h2>❤️ Your Wishlist</h2>
 
   <div *ngIf="wishlistItems.length === 0">
-    <p>Your wishlist is empty.</p>
+    <p class="empty">Your wishlist is empty.</p>
   </div>
 
-  <div *ngIf="wishlistItems.length > 0">
-    <div class="wishlist-item" *ngFor="let item of wishlistItems">
+  <div class="product-grid" *ngIf="wishlistItems.length > 0">
+    <div class="product-card" *ngFor="let item of wishlistItems">
       <img [src]="item.image" alt="{{ item.name }}" />
-      <div>
-        <h3>{{ item.name }}</h3>
-        <p>Price: ₹{{ item.price }}</p>
-        <button (click)="removeFromWishlist(item.id)">Remove</button>
-      </div>
+      <h3>{{ item.name }}</h3>
+      <p class="price">₹{{ item.price }}</p>
+      <button class="remove-btn" (click)="removeFromWishlist(item.id)">Remove</button>
     </div>
   </div>
-</div>
+</section>
