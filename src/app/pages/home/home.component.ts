@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
-
+import { RouterModule, Router } from '@angular/router';
 import { CartService } from '../../services/cart.service';
 import { ToastrService } from 'ngx-toastr';
 
@@ -15,7 +14,8 @@ import { ToastrService } from 'ngx-toastr';
 export class HomeComponent {
   constructor(
     private cartService: CartService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private router: Router
   ) {}
 
   starProducts = [
@@ -53,5 +53,9 @@ export class HomeComponent {
       positionClass: 'toast-bottom-center',
       closeButton: true
     });
+  }
+
+  navigateToCategory(category: string): void {
+    this.router.navigate(['/products'], { queryParams: { category } });
   }
 }

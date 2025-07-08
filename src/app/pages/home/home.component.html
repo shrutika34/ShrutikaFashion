@@ -6,8 +6,6 @@
   </div>
 </section>
 
-
-
 <section class="star-products">
   <h2>🔥 Star Picks of the Week</h2>
   <div class="product-grid">
@@ -20,11 +18,15 @@
   </div>
 </section>
 
-
 <section class="home-categories">
   <h2>👜 Explore Categories</h2>
   <div class="category-grid">
-    <div class="category-card" *ngFor="let cat of categories">
+    <div
+      class="category-card"
+      *ngFor="let cat of categories"
+      (click)="navigateToCategory(cat.title)"
+      style="cursor: pointer;"
+    >
       <img [src]="cat.image" alt="{{ cat.title }}">
       <span>{{ cat.title }}</span>
     </div>
