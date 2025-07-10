@@ -1,8 +1,9 @@
 <div class="cart-page">
-  <h2>🛒 Your Cart</h2>
+  <h2 class="section-title">🛒 Your Cart</h2>
 
   <div *ngIf="cartItems.length === 0" class="empty-message">
     <p>Your cart is empty.</p>
+    <a routerLink="/collection" class="browse-link">Continue Shopping</a>
   </div>
 
   <div *ngIf="cartItems.length > 0">
@@ -13,17 +14,18 @@
           <h3>{{ item.name }}</h3>
           <p>Price: ₹{{ item.price }}</p>
           <p>Quantity: {{ item.quantity }}</p>
-          <button (click)="removeItem(item.id)">Remove</button>
+          <button class="remove-btn" (click)="removeItem(item.id)">Remove</button>
         </div>
       </div>
     </div>
 
     <div class="cart-summary">
-      <h3>Total: ₹{{ total }}</h3>
+      <h3 class="total">Total: ₹{{ total }}</h3>
 
       <div class="btn-group">
         <button class="clear-btn" (click)="clearCart()">🗑️ Clear Cart</button>
-        <button class="checkout-btn" routerLink="/checkout">✅ Proceed to Checkout</button>
+        <button class="checkout-btn" (click)="goToCheckout()">✅ Proceed to Checkout</button>
+
       </div>
     </div>
   </div>

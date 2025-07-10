@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CartService } from '../../services/cart.service';
+import { RouterModule, Router } from '@angular/router';
 
 @Component({
   selector: 'app-cart',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.scss']
 })
@@ -13,7 +14,10 @@ export class CartComponent implements OnInit {
   cartItems: any[] = [];
   total: number = 0;
 
-  constructor(private cartService: CartService) {}
+  constructor(
+    private cartService: CartService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.loadCart();
@@ -32,5 +36,9 @@ export class CartComponent implements OnInit {
   clearCart(): void {
     this.cartService.clearCart();
     this.loadCart();
+  }
+
+  goToCheckout(): void {
+    this.router.navigate(['/checkout']);
   }
 }

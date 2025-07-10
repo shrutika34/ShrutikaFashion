@@ -1,9 +1,43 @@
 import { Routes } from '@angular/router';
-import { LoginComponent } from './pages/login/login.component';
-import { RegisterComponent } from './pages/register/register.component';
 
 export const routes: Routes = [
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
-  { path: '', redirectTo: '/login', pathMatch: 'full' }
+  {
+    path: '',
+    redirectTo: '/login',
+    pathMatch: 'full'
+  },
+  {
+    path: 'login',
+    loadComponent: () =>
+      import('./pages/login/login.component').then(m => m.LoginComponent)
+  },
+  {
+    path: 'register',
+    loadComponent: () =>
+      import('./pages/register/register.component').then(m => m.RegisterComponent)
+  },
+  {
+    path: 'home',
+    loadComponent: () =>
+      import('./pages/home/home.component').then(m => m.HomeComponent)
+  },
+  {
+    path: 'collection',
+    loadComponent: () =>
+      import('./pages/product-list/product-list.component').then(m => m.ProductListComponent)
+  },
+  {
+    path: 'collection/:category',
+    loadComponent: () =>
+      import('./pages/product-list/product-list.component').then(m => m.ProductListComponent)
+  },
+  {
+    path: 'checkout',
+    loadComponent: () =>
+      import('./pages/checkout/checkout.component').then(m => m.CheckoutComponent)
+  },
+  {
+    path: '**',
+    redirectTo: '/login'
+  }
 ];

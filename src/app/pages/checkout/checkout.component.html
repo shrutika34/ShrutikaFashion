@@ -1,20 +1,35 @@
-<section class="checkout">
-  <h2>Checkout</h2>
+<section class="checkout-wrapper">
+  <h2 class="section-title">🧾 Checkout</h2>
 
-  <form (ngSubmit)="placeOrder()">
-    <label>Name:</label>
-    <input type="text" [(ngModel)]="name" name="name" required />
+  <form (ngSubmit)="placeOrder()" class="checkout-form">
+    <div class="form-group">
+      <label>Name</label>
+      <input type="text" [(ngModel)]="name" name="name" required />
+    </div>
 
-    <label>Address:</label>
-    <textarea [(ngModel)]="address" name="address" required></textarea>
+    <div class="form-group">
+      <label>Address</label>
+      <textarea [(ngModel)]="address" name="address" rows="3" required></textarea>
+    </div>
 
-    <label>Payment Method:</label>
-    <select [(ngModel)]="paymentMethod" name="paymentMethod">
-      <option value="card">Credit/Debit Card</option>
-      <option value="cod">Cash on Delivery</option>
-    </select>
+    <div class="form-group">
+      <label>Payment Method</label>
+      <select [(ngModel)]="paymentMethod" name="paymentMethod">
+        <option value="card">Credit/Debit Card</option>
+        <option value="cod">Cash on Delivery</option>
+      </select>
+    </div>
 
-    <button type="submit" class="btn">Place Order</button>
+    <div class="summary">
+      <h3>🛒 Cart Summary</h3>
+      <ul>
+        <li *ngFor="let item of cartItems">
+          {{ item.name }} × {{ item.quantity }} = ₹{{ item.price * item.quantity }}
+        </li>
+      </ul>
+      <p class="total">Total: ₹{{ total }}</p>
+    </div>
+
+    <button type="submit" class="submit-btn">Place Order</button>
   </form>
 </section>
-

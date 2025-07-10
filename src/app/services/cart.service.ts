@@ -1,6 +1,4 @@
-import { Injectable, inject } from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
-import { PLATFORM_ID } from '@angular/core';
+import { Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +18,11 @@ export class CartService {
 
   getCartItems(): any[] {
     return this.cartItems;
+  }
+
+  
+  getItems(): any[] {
+    return this.getCartItems();
   }
 
   addToCart(product: any): void {

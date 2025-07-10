@@ -3,29 +3,73 @@ import { provideRouter } from '@angular/router';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideToastr } from 'ngx-toastr';
 
-import { HomeComponent } from './pages/home/home.component';
-import { ProductListComponent } from './pages/product-list/product-list.component';
-import { ProductDetailsComponent } from './pages/product-details/product-details.component';
-import { CartComponent } from './pages/cart/cart.component';
-import { WishlistComponent } from './pages/wishlist/wishlist.component';
-import { LoginComponent } from './pages/login/login.component';
-import { RegisterComponent } from './pages/register/register.component';
-import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
-import { CheckoutComponent } from './pages/checkout/checkout.component';
-
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter([
-      { path: '', component: HomeComponent },
-      { path: 'products', component: ProductListComponent },
-      { path: 'product/:id', component: ProductDetailsComponent },
-      { path: 'cart', component: CartComponent },
-      { path: 'wishlist', component: WishlistComponent },
-      { path: 'login', component: LoginComponent },
-      { path: 'register', component: RegisterComponent },
-      { path: 'forgot-password', component: ForgotPasswordComponent },
-      { path: 'checkout', component: CheckoutComponent },
-      { path: '**', redirectTo: '' }
+      {
+        path: '',
+        loadComponent: () =>
+          import('./pages/home/home.component').then(m => m.HomeComponent)
+      },
+      {
+        path: 'login',
+        loadComponent: () =>
+          import('./pages/login/login.component').then(m => m.LoginComponent)
+      },
+      {
+        path: 'register',
+        loadComponent: () =>
+          import('./pages/register/register.component').then(m => m.RegisterComponent)
+      },
+      {
+        path: 'forgot-password',
+        loadComponent: () =>
+          import('./pages/forgot-password/forgot-password.component').then(m => m.ForgotPasswordComponent)
+      },
+      {
+        path: 'home',
+        loadComponent: () =>
+          import('./pages/home/home.component').then(m => m.HomeComponent)
+      },
+      {
+        path: 'products',
+        loadComponent: () =>
+          import('./pages/product-list/product-list.component').then(m => m.ProductListComponent)
+      },
+      {
+        path: 'product/:id',
+        loadComponent: () =>
+          import('./pages/product-details/product-details.component').then(m => m.ProductDetailsComponent)
+      },
+      {
+        path: 'collection',
+        loadComponent: () =>
+          import('./pages/product-list/product-list.component').then(m => m.ProductListComponent)
+      },
+      {
+        path: 'collection/:category',
+        loadComponent: () =>
+          import('./pages/product-list/product-list.component').then(m => m.ProductListComponent)
+      },
+      {
+        path: 'cart',
+        loadComponent: () =>
+          import('./pages/cart/cart.component').then(m => m.CartComponent)
+      },
+      {
+        path: 'wishlist',
+        loadComponent: () =>
+          import('./pages/wishlist/wishlist.component').then(m => m.WishlistComponent)
+      },
+      {
+        path: 'checkout',
+        loadComponent: () =>
+          import('./pages/checkout/checkout.component').then(m => m.CheckoutComponent)
+      },
+      {
+        path: '**',
+        redirectTo: ''
+      }
     ]),
     provideAnimations(),
     provideToastr()
